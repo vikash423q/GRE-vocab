@@ -19,16 +19,31 @@ const useStyles = makeStyles(theme => ({
     box: {
         width: theme.spacing(40),
         position: 'fixed',
-        right: theme.spacing(2),
         top: theme.spacing(37),
+        right: theme.spacing(2),
         padding: theme.spacing(2),
+        [theme.breakpoints.up('md')]: {
+            width: theme.spacing(40),
+            right: theme.spacing(2),
+        },
+        [theme.breakpoints.down('md')]: {
+            width: theme.spacing(30),
+            right: theme.spacing(2),
+        },
+        [theme.breakpoints.down('sm')]: {
+            width: theme.spacing(25),
+            right: theme.spacing(1),
+        },
+        [theme.breakpoints.down('xs')]: {
+            width: theme.spacing(20),
+        }
     },
     grid: {
-        height: 'inherit',
+        height: '100%',
+        overflowY: 'scroll',
     },
     detail: {
-        flexGrow: 1,
-        paddingTop: theme.spacing(1),
+        height: '100%'
     },
     mic: {
         margin: theme.spacing(1),

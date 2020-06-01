@@ -20,8 +20,22 @@ const useStyles = makeStyles(theme => ({
         height: theme.spacing(25),
         width: theme.spacing(40),
         position: 'fixed',
-        right: theme.spacing(2),
         top: theme.spacing(10),
+        [theme.breakpoints.up('md')]: {
+            width: theme.spacing(40),
+            right: theme.spacing(2),
+        },
+        [theme.breakpoints.down('md')]: {
+            width: theme.spacing(30),
+            right: theme.spacing(2),
+        },
+        [theme.breakpoints.down('sm')]: {
+            width: theme.spacing(25),
+            right: theme.spacing(1),
+        },
+        [theme.breakpoints.down('xs')]: {
+            width: theme.spacing(20),
+        }
     },
     grid: {
         height: 'inherit',
@@ -30,8 +44,35 @@ const useStyles = makeStyles(theme => ({
         flexGrow: 1,
         paddingTop: theme.spacing(1),
     },
+    detail_text: {
+        flexGrow: 1,
+        paddingTop: theme.spacing(1),
+        [theme.breakpoints.up('md')]: {
+            fontSize: '0.9rem',
+        },
+        [theme.breakpoints.down('md')]: {
+            fontSize: '0.9rem',
+        },
+        [theme.breakpoints.down('sm')]: {
+            fontSize: '0.8rem',
+        },
+        [theme.breakpoints.down('xs')]: {
+            fontSize: '0.7rem',
+        }
+    },
     mic: {
-        margin: theme.spacing(1),
+        [theme.breakpoints.up('md')]: {
+            fontSize: '2rem',
+        },
+        [theme.breakpoints.down('md')]: {
+            fontSize: '2rem',
+        },
+        [theme.breakpoints.down('sm')]: {
+            fontSize: '1.8rem',
+        },
+        [theme.breakpoints.down('xs')]: {
+            fontSize: '1.4rem',
+        }
     }
 }));
 
@@ -99,13 +140,13 @@ const VoiceControl = (props) => {
                 <Grid className={classes.grid} container direction="column" justify="space-between" align="center">
                     <Grid item container direction="column" justify="space-around" align="center">
                         <Grid item>
-                            <IconButton className={classes.mic} onClick={toggleListening} style={{ marginBottom: 2 }}><MicIcon color="primary" fontSize="large" /></IconButton>
+                            <IconButton className={classes.mic} onClick={toggleListening} style={{ marginBottom: 2 }}><MicIcon className={classes.mic} color="primary" /></IconButton>
                         </Grid>
                         <Grid item>{listening ? <LinearProgress color="primary" style={{ backgroundColor: '#ff9800', color: '#607d8b' }} /> : null}</Grid>
 
                     </Grid>
                     <Grid item container className={classes.detail} justify="center" align="center">
-                        <Typography>{interimTranscript}</Typography>
+                        <Typography className={classes.detail_text}>{interimTranscript}</Typography>
                     </Grid>
                     {interimTranscript ? <Grid container justify="center" align="center">
                         <IconButton onClick={resetTranscript} ><DeleteIcon /></IconButton>

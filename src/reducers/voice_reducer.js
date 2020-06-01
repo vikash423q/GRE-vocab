@@ -75,7 +75,7 @@ const handleCheatCommands = () => {
 
             }
         } else clearInterval(myInterval);
-    }, 600);
+    }, 1000);
 }
 
 const handleCommand = (action) => {
@@ -118,7 +118,8 @@ const handleCommand = (action) => {
         startListening();
     } else {
         const state = store.getState();
-        const options = state.quiz.quiz[state.quiz.current].options || [];
+        const questions = state.quiz.quiz[state.quiz.current] || {};
+        const options = questions.options || [];
         options.forEach((item, idx) => {
             if (cmd.includes(item.word)) {
                 store.dispatch({ type: 'OPTION_SELECT', index: idx });

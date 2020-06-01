@@ -10,6 +10,7 @@ const initialState = {
     current: 0,
     points: 0,
     showResult: false,
+    started: false,
 }
 
 const loadWords = () => {
@@ -83,6 +84,7 @@ const quizReducer = (state = initialState, action) => {
             newState.quiz = prepareQuiz(state);
             return newState;
         case 'LOADED_QUIZ':
+            newState.started = true;
             newState.loading = false;
             return newState;
         case 'CHANGE_NUM':

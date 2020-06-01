@@ -30,7 +30,16 @@ const lightRedColor = '#ff6e40';
 const useStyles = (secs) => makeStyles(theme => ({
     question_container: {
         padding: 0,
-        width: theme.spacing(120),
+        // width: theme.spacing(120),
+        // [theme.breakpoints.up('md')]: {
+        //     width: theme.spacing(120),
+        // },
+        // [theme.breakpoints.down('md')]: {
+        //     width: theme.spacing(100),
+        // },
+        // [theme.breakpoints.down('sm')]: {
+        //     width: theme.spacing(80),
+        // },
     },
     paper: {
         backgroundColor: theme.palette.type === 'dark' ? '#616161' : fade(theme.palette.common.white, 0.02),
@@ -38,13 +47,42 @@ const useStyles = (secs) => makeStyles(theme => ({
             backgroundColor: theme.palette.type === 'dark' ? '#757575' : '#fff',
         },
         padding: theme.spacing(5),
-        margin: theme.spacing(3),
+
+        [theme.breakpoints.up('md')]: {
+            padding: theme.spacing(5),
+            marginTop: theme.spacing(3),
+            marginBottom: theme.spacing(3),
+        },
+        [theme.breakpoints.down('md')]: {
+            padding: theme.spacing(4),
+            marginTop: theme.spacing(2),
+            marginBottom: theme.spacing(2),
+        },
+        [theme.breakpoints.down('sm')]: {
+            padding: theme.spacing(3),
+            marginTop: theme.spacing(1),
+            marginBottom: theme.spacing(1),
+        },
+        [theme.breakpoints.down('xs')]: {
+            padding: theme.spacing(2),
+            marginTop: theme.spacing(1),
+            marginBottom: theme.spacing(1),
+        },
     },
     question_header: {
         height: theme.spacing(7),
         borderTop: `1px solid ${borderColor}`,
         borderBottom: `1px solid ${borderColor}`,
         justifyContent: 'center',
+        [theme.breakpoints.up('md')]: {
+            height: theme.spacing(7),
+        },
+        [theme.breakpoints.down('md')]: {
+            height: theme.spacing(6),
+        },
+        [theme.breakpoints.down('sm')]: {
+            height: theme.spacing(5),
+        },
     },
     header_item: {
         justifyContent: 'center',
@@ -53,7 +91,16 @@ const useStyles = (secs) => makeStyles(theme => ({
     question_description: {
         height: theme.spacing(30),
         alignContent: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        [theme.breakpoints.up('md')]: {
+            height: theme.spacing(30),
+        },
+        [theme.breakpoints.down('md')]: {
+            height: theme.spacing(25),
+        },
+        [theme.breakpoints.down('sm')]: {
+            height: theme.spacing(20),
+        },
     },
     options: {
         alignContent: 'center',
@@ -63,18 +110,63 @@ const useStyles = (secs) => makeStyles(theme => ({
         color: theme.palette.type === 'dark' ? '#eee' : '#3b3e41',
         fontSize: 28,
         fontWeight: 500,
-        fontFamily: 'Playfair Display, serif'
+        fontFamily: 'Playfair Display, serif',
+        [theme.breakpoints.up('md')]: {
+            fontSize: 28,
+            fontWeight: 500,
+        },
+        [theme.breakpoints.down('md')]: {
+            fontSize: 26,
+            fontWeight: 500,
+        },
+        [theme.breakpoints.down('sm')]: {
+            fontSize: 22,
+            fontWeight: 500,
+        },
+        [theme.breakpoints.down('sm')]: {
+            fontSize: 20,
+            fontWeight: 500,
+        },
     },
     button_text: {
         color: '#375c71',
         fontWeight: 600,
-        fontFamily: fontFamily
+        fontFamily: fontFamily,
+        [theme.breakpoints.up('md')]: {
+            fontSize: '1rem',
+        },
+        [theme.breakpoints.down('md')]: {
+            fontSize: '0.9rem',
+        },
+        [theme.breakpoints.down('sm')]: {
+            fontSize: '0.8rem',
+        },
     },
     bottom_text: {
         color: theme.palette.type === 'dark' ? lightRedColor : redColor,
         letterSpacing: '0.17rem',
         lineHeight: '1.25rem',
-        fontSize: '1.25rem'
+        fontSize: '1.25rem',
+        [theme.breakpoints.up('md')]: {
+            letterSpacing: '0.17rem',
+            lineHeight: '1.25rem',
+            fontSize: '1.25rem',
+        },
+        [theme.breakpoints.down('md')]: {
+            letterSpacing: '0.15rem',
+            lineHeight: '1.1rem',
+            fontSize: '1.1rem',
+        },
+        [theme.breakpoints.down('sm')]: {
+            letterSpacing: '0.13rem',
+            lineHeight: '1rem',
+            fontSize: '1rem',
+        },
+        [theme.breakpoints.down('xs')]: {
+            letterSpacing: '0.12rem',
+            lineHeight: '0.9rem',
+            fontSize: '0.9rem',
+        },
     },
     icon: {
         color: theme.palette.type === 'dark' ? lightRedColor : redColor,
@@ -85,14 +177,50 @@ const useStyles = (secs) => makeStyles(theme => ({
         fontWeight: 400,
         fontSize: '1rem',
         marginBottom: 0,
+        [theme.breakpoints.up('md')]: {
+            fontSize: '1rem',
+        },
+        [theme.breakpoints.down('md')]: {
+            fontSize: '0.9rem',
+        },
+        [theme.breakpoints.down('sm')]: {
+            fontSize: '0.8rem',
+        },
+        [theme.breakpoints.down('xs')]: {
+            fontSize: '0.7rem',
+        },
     },
     timeout: {
         color: theme.palette.type === 'dark' ? lightRedColor : redColor,
+        [theme.breakpoints.up('md')]: {
+            fontWeight: 500,
+            fontSize: '0.8rem',
+        },
+        [theme.breakpoints.down('md')]: {
+            fontWeight: 500,
+            fontSize: '0.6rem',
+        },
+        [theme.breakpoints.down('sm')]: {
+            fontWeight: 500,
+            fontSize: '0.5rem',
+        },
     },
     timer: {
         color: secs > 5 ? (theme.palette.type === 'dark' ? lightGreenColor : greenColor) : (theme.palette.type === 'dark' ? lightRedColor : redColor),
         fontWeight: 700,
-        fontSize: '1.6rem'
+        fontSize: '1.6rem',
+        [theme.breakpoints.up('md')]: {
+            fontSize: '1.6rem',
+            fontWeight: 700,
+        },
+        [theme.breakpoints.down('md')]: {
+            fontSize: '1.4rem',
+            fontWeight: 700,
+        },
+        [theme.breakpoints.down('sm')]: {
+            fontSize: '1.2rem',
+            fontWeight: 700,
+        },
 
     },
     option_button: {
@@ -113,7 +241,6 @@ const useStyles = (secs) => makeStyles(theme => ({
         },
         height: theme.spacing(6),
         width: theme.spacing(45),
-        marginBottom: theme.spacing(3),
     },
     footer: {
         marginTop: theme.spacing(4),
@@ -130,7 +257,7 @@ const Question = (props) => {
     const myRef = useRef(null);
     const [scrolled, setScroll] = useState(false);
     const scrollToRef = (ref) => {
-        window.scrollTo(0, ref.current.offsetTop);
+        window.scrollTo(0, ref.current.offsetTop - 60);
         setScroll(true);
     };
 
@@ -182,7 +309,7 @@ const Question = (props) => {
             <Grid container item justify="space-between" className="current-question">
                 {state.quiz.current === props.idx && state.voice.active ? <Say speak={props.data.question} /> : null}
                 <Grid item></Grid>
-                <Grid container direction="column" item className={classes.question_container}>
+                <Grid container direction="column" lg={6} md={8} sm={10} xs={12} item className={classes.question_container}>
                     <Paper className={classes.paper}>
 
                         <Grid container item className={classes.question_header}>
@@ -203,7 +330,7 @@ const Question = (props) => {
                         </Grid>
                         <Grid container item justify="flex-end">
                             <Paper>
-                                <Typography variant="subtitle" color='secondary' style={{ padding: '0.7rem', borderBottomRightRadius: 12, borderBottomLeftRadius: 12 }}>SOURCE: {props.data.source.toUpperCase()}</Typography>
+                                <Typography variant="subtitle" color='secondary' className={classes.text} style={{ padding: '0.7rem', borderBottomRightRadius: 12, borderBottomLeftRadius: 12 }}>SOURCE: {props.data.source.toUpperCase()}</Typography>
                             </Paper>
                         </Grid>
                         <Grid container item className={classes.question_description}>

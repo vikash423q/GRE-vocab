@@ -27,18 +27,43 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.down('sm')]: {
       height: 'calc(100% - 56px)'
     },
-    marginTop: theme.spacing(7)
+    marginTop: theme.spacing(7),
+    justifyContent: 'center'
   },
   result_text: {
     color: theme.palette.type === 'dark' ? lightRedColor : redColor,
     marginBottom: theme.spacing(2),
   },
-  result: {
-    width: theme.spacing(100),
+  start: {
+    width: theme.spacing(80),
     backgroundColor: theme.palette.type === 'dark' ? '#616161' : fade(theme.palette.common.white, 0.02),
     padding: theme.spacing(5),
-    marginBottom: theme.spacing(5),
-
+    margin: theme.spacing(5),
+    [theme.breakpoints.up('md')]: {
+      width: theme.spacing(80),
+    },
+    [theme.breakpoints.down('md')]: {
+      width: theme.spacing(60),
+    },
+    [theme.breakpoints.down('sm')]: {
+      width: theme.spacing(40),
+      padding: theme.spacing(3),
+      margin: theme.spacing(3),
+    },
+  },
+  result: {
+    width: theme.spacing(80),
+    backgroundColor: theme.palette.type === 'dark' ? '#616161' : fade(theme.palette.common.white, 0.02),
+    padding: theme.spacing(5),
+    margin: theme.spacing(5),
+    [theme.breakpoints.up('sm')]: {
+    },
+    [theme.breakpoints.down('sm')]: {
+    },
+    [theme.breakpoints.up('md')]: {
+    },
+    [theme.breakpoints.down('md')]: {
+    }
   },
   footer: {
     height: theme.spacing(20),
@@ -52,21 +77,29 @@ function App() {
 
   const quiz = useSelector(state => state.quiz);
   const cheat = useSelector(state => state.cheat);
+
   const loadQuiz = () => {
     dispatch({ type: 'LOADING_QUIZ' });
     dispatch({ type: 'LOAD_WORDS' });
     dispatch({ type: 'PREPARE_QUIZ' });
     dispatch({ type: 'LOADED_QUIZ' });
   }
-  useEffect(() => {
-    loadQuiz();
-  }, []);
 
   return (
     <React.Fragment>
       {console.log('refreshing app..')}
       <TopBar />
+
       <Grid container className={classes.container}>
+        {!quiz.started ? <Grow in={true}><Grid item>
+          <Paper className={classes.start}>
+            <Grid container direction="column" justify="center" align="center">
+              <Grid item>
+                <Button onClick={() => loadQuiz()} className="start-button" contained style={{ backgroundColor: '#ffa726' }}><Typography style={{ color: '#fff', fontWeight: 700 }}>Start Quiz</Typography></Button>
+              </Grid>
+            </Grid>
+          </Paper>
+        </Grid></Grow> : null}
 
         {quiz.quiz.map((item, idx) => idx <= quiz.current ? <Question data={item} idx={idx} key={item.question} /> : null)}
 
@@ -77,7 +110,7 @@ function App() {
       <Grid container className={classes.footer}>
         <Grid item></Grid>
         {quiz.showResult ? <Grow in={true}><Grid item>
-          <Paper className={classes.result}>
+          <Paper className={classes.start}>
             <Grid container direction="column" justify="center" align="center">
               <Grid item>
                 <Typography variant="h5" className={classes.result_text}>Result: {quiz.quiz.filter(item => item.answerCorrect).length}/{quiz.num}</Typography>
