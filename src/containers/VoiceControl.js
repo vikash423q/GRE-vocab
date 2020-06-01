@@ -157,4 +157,4 @@ const VoiceControl = (props) => {
     );
 }
 
-export default SpeechRecognition({ autoStart: false, continous: false })(VoiceControl);
+export default SpeechRecognition({ autoStart: false, continous: true })(VoiceControl);
