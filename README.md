@@ -1,2 +1,2 @@
-#### ALL GRE WORDS ####
-#### SOURCES: BARRON, MAGOOSH, MANHATTAN ####
+###### ALL GRE WORDS ######
+###### SOURCES: BARRON, MAGOOSH, MANHATTAN ######
