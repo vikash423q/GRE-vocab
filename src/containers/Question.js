@@ -13,6 +13,8 @@ import Container from '@material-ui/core/Container/';
 import Grow from '@material-ui/core/Grow';
 import IconButton from '@material-ui/core/IconButton';
 import { Say } from 'react-say';
+import { shake, pulse } from 'react-animations';
+import Radium, { StyleRoot } from 'radium';
 
 const hoverColor = '#bbdefb';
 const backgroundColor = '#e5edf1';
@@ -25,6 +27,32 @@ const greenColor = 'green';
 const lightGreenColor = '#00e676';
 const redColor = '#ae0015';
 const lightRedColor = '#ff6e40';
+
+
+const styles = {
+    shake: {
+        animation: 'x 1s',
+        animationName: Radium.keyframes(shake, 'shake'),
+        width: 'inherit',
+        padding: 0,
+        marginLeft: '1rem',
+        marginRight: '1rem'
+    },
+    normal: {
+        width: 'inherit',
+        marginLeft: '1rem',
+        padding: 0,
+        marginRight: '1rem'
+    },
+    pulse: {
+        animation: 'x 1s',
+        animationName: Radium.keyframes(pulse, 'pulse'),
+        width: 'inherit',
+        marginLeft: '1rem',
+        padding: 0,
+        marginRight: '1rem'
+    }
+}
 
 
 const useStyles = (secs) => makeStyles(theme => ({
@@ -104,7 +132,8 @@ const useStyles = (secs) => makeStyles(theme => ({
     },
     options: {
         alignContent: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        marginLeft: -1 * theme.spacing(2)
     },
     question: {
         color: theme.palette.type === 'dark' ? '#eee' : '#3b3e41',
@@ -224,9 +253,9 @@ const useStyles = (secs) => makeStyles(theme => ({
 
     },
     option_button: {
+        width: 'inherit',
         margin: theme.spacing(2),
         height: theme.spacing(6),
-        width: 'inherit',
         backgroundColor: backgroundColor,
         '&:hover': {
             backgroundColor: hoverColor,
@@ -338,12 +367,13 @@ const Question = (props) => {
                                 {props.data.question}
                             </Typography>
                         </Grid>
-                        <Grid container item className={classes.options}>
+                        <Grid container item xs={12} className={classes.options}>
                             {props.data.options.map((item, idx) => <Grid key={item.word} item xs={6} container justify="center" align="center">
-                                <Button onClick={() => onSelected(props.data, idx)} style={{ backgroundColor: item.selected ? item.correct ? correctColor : wrongColor : item.correct && (props.data.answered || seconds == 0) ? correctColor : backgroundColor }}
-                                    variant="contained" size='large' className={classes.option_button + ((props.data.answered || seconds == 0) ? ` already-answered choice-${idx + 1}` : ` current-choices choice-${idx + 1}`)} disableElevation>
-                                    <Typography className={classes.button_text} style={{ color: item.selected || (item.correct && (props.data.answered || seconds == 0)) ? '#fff' : '#375c71' }}>{item.word}</Typography>
-                                </Button>
+                                {props.data.answered || seconds == 0 ?
+                                    <StyleRoot style={item.correct ? styles.pulse : item.selected ? styles.shake : styles.normal}>
+                                        <AnswerButton item={item} idx={idx} data={props.data} seconds={seconds} onSelected={onSelected} />    </StyleRoot>
+                                    :
+                                    <StyleRoot style={styles.normal}><AnswerButton item={item} idx={idx} data={props.data} seconds={seconds} onSelected={onSelected} /></StyleRoot>}
                             </Grid>)}
                         </Grid>
                         <Grid item container justify="center" align="center" className={classes.footer}>
@@ -361,6 +391,17 @@ const Question = (props) => {
 
             </Grid>
         </Grow>
+    );
+}
+
+const AnswerButton = (props) => {
+    const classes = useStyles(props.seconds)();
+
+    return (
+        <Button onClick={() => props.onSelected(props.data, props.idx)} style={{ backgroundColor: props.item.selected ? props.item.correct ? correctColor : wrongColor : props.item.correct && (props.data.answered || props.seconds == 0) ? correctColor : backgroundColor }}
+            variant="contained" size='large' className={classes.option_button + ((props.data.answered || props.seconds == 0) ? ` already-answered choice-${props.idx + 1}` : ` current-choices choice-${props.idx + 1}`)} disableElevation>
+            <Typography className={classes.button_text} style={{ color: props.item.selected || (props.item.correct && (props.data.answered || props.seconds == 0)) ? '#fff' : '#375c71' }}>{props.item.word}</Typography>
+        </Button>
     );
 }
 
