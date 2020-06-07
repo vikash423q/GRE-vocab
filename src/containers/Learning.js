@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
         height: '100vh'
     },
     title: {
-        marginLeft: theme.spacing(3),
+        marginLeft: theme.spacing(2),
         fontWeight: 600,
         fontSize: '0.9rem',
         '&:hover': {
@@ -109,7 +109,7 @@ const LearningApp = (props) => {
 
     return (<React.Fragment>
         <Grid container className={classes.container}>
-            <Grid elevation={5} item container xs={3} md={2} className={classes.bar}>
+            <Grid elevation={5} item container xs={2} sm={3} md={2} lg={2} className={classes.bar}>
                 <Paper className={classes.paper}>
                     <Grid container direction="column" justify="center" align="flex-start">
                         <Grid item container style={{ marginBottom: 8 }}><Typography variant="subtitle2" color="secondary">STUDY</Typography></Grid>
@@ -118,7 +118,7 @@ const LearningApp = (props) => {
                                 <ViewCarouselIcon className={classes.icon} />
                             </Grid>
                             <Grid item onClick={() => dispatch({ type: 'CHANGE_SELECTED', payload: 'flashcard' })}>
-                                <Typography gutterBottom variant="h6" style={{ color: study.selected === 'flashcard' ? '#8bc34a' : grey[400] }} className={classes.title}>Flashcards</Typography>
+                                <Typography noWrap gutterBottom variant="h6" style={{ color: study.selected === 'flashcard' ? '#8bc34a' : grey[400] }} className={classes.title}>Flashcards</Typography>
                             </Grid>
                         </Grid>
                         <Grid item container justify="flex-start">
@@ -126,7 +126,7 @@ const LearningApp = (props) => {
                                 <RotateRightIcon className={classes.icon} />
                             </Grid>
                             <Grid item onClick={() => dispatch({ type: 'CHANGE_SELECTED', payload: 'learn' })}>
-                                <Typography gutterBottom variant="h6" style={{ color: study.selected === 'learn' ? '#8bc34a' : grey[400] }} className={classes.title}>Learn</Typography>
+                                <Typography noWrap gutterBottom variant="h6" style={{ color: study.selected === 'learn' ? '#8bc34a' : grey[400] }} className={classes.title}>Learn</Typography>
                             </Grid>
                         </Grid>
                         <Grid item container justify="flex-start">
@@ -134,7 +134,7 @@ const LearningApp = (props) => {
                                 <CreateOutlinedIcon className={classes.icon} />
                             </Grid>
                             <Grid item onClick={() => dispatch({ type: 'CHANGE_SELECTED', payload: 'write' })}>
-                                <Typography gutterBottom variant="h6" style={{ color: study.selected === 'write' ? '#8bc34a' : grey[400] }} className={classes.title}>Write</Typography>
+                                <Typography noWrap gutterBottom variant="h6" style={{ color: study.selected === 'write' ? '#8bc34a' : grey[400] }} className={classes.title}>Write</Typography>
                             </Grid>
                         </Grid>
                         <Grid item container justify="flex-start">
@@ -142,13 +142,13 @@ const LearningApp = (props) => {
                                 <DescriptionOutlinedIcon className={classes.icon} />
                             </Grid>
                             <Grid item onClick={() => dispatch({ type: 'CHANGE_SELECTED', payload: 'test' })}>
-                                <Typography gutterBottom variant="h6" style={{ color: study.selected === 'test' ? '#8bc34a' : grey[400] }} className={classes.title}>Test</Typography>
+                                <Typography noWrap gutterBottom variant="h6" style={{ color: study.selected === 'test' ? '#8bc34a' : grey[400] }} className={classes.title}>Test</Typography>
                             </Grid>
                         </Grid>
                     </Grid>
                 </Paper>
             </Grid>
-            <Grid elevation={5} item container xs={6} md={5} sm={4} className={classes.bar}>
+            <Grid elevation={5} item container xs={9} sm={8} md={6} className={classes.bar}>
                 <Paper elevation={5} className={classes.paper} style={{ overflowY: 'scroll' }}>
                     <Grid container direction="column" justify="center" align="center">
                         <Grid item container justify="space-around" align="center">

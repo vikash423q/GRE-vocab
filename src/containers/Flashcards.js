@@ -54,11 +54,39 @@ const useStyles = makeStyles((theme) => ({
         '&:hover': {
             cursor: 'pointer'
         },
-        overflowY: 'scroll'
+        overflowY: 'scroll',
+        [theme.breakpoints.up('md')]: {
+            height: theme.spacing(40),
+            width: theme.spacing(65),
+        },
+        [theme.breakpoints.down('md')]: {
+            height: theme.spacing(35),
+            width: theme.spacing(55),
+        },
+        [theme.breakpoints.down('sm')]: {
+            height: theme.spacing(30),
+            width: theme.spacing(48),
+        },
+        [theme.breakpoints.down('xs')]: {
+            height: theme.spacing(26),
+            width: theme.spacing(40),
+        },
     },
     bottombar: {
         marginTop: theme.spacing(1),
         width: theme.spacing(60),
+        [theme.breakpoints.up('md')]: {
+            width: theme.spacing(65),
+        },
+        [theme.breakpoints.down('md')]: {
+            width: theme.spacing(55),
+        },
+        [theme.breakpoints.down('sm')]: {
+            width: theme.spacing(45),
+        },
+        [theme.breakpoints.down('sm')]: {
+            width: theme.spacing(36),
+        },
     },
     paper: {
         height: '100%',
@@ -121,15 +149,15 @@ const Flashcards = (props) => {
             </Grid>
             <Grid item container justify="center" className={classes.bottombar}>
                 <Grid container>
-                    <Grid item container xs={4}></Grid>
-                    <Grid item container justify="space-around" align="center" xs={4}>
+                    <Grid item container md={4} sm={12}></Grid>
+                    <Grid item container justify="space-around" align="center" md={4} sm={12}>
                         <Grid item><IconButton className={classes.icon} onKeyPress={handleKey} onClick={handlePrev}><ArrowBackOutlinedIcon /></IconButton></Grid>
 
                         <Typography variant="subtitle2" style={{ marginTop: 12 }} >{flashcard.current + 1}/{flashcard.words.length}</Typography>
 
                         <Grid item><IconButton className={classes.icon} onKeyPress={handleKey} onClick={handleNext}><ArrowForwardOutlinedIcon /></IconButton></Grid>
                     </Grid>
-                    <Grid item container xs={4} justify="flex-end">
+                    <Grid item container md={4} sm={12} justify="center">
                         <Grid item><IconButton className={classes.icon} onKeyPress={handleKey} onClick={handleClick}><KeyboardOutlinedIcon /></IconButton></Grid>
                         <Grid item><IconButton className={classes.icon} onClick={() => dispatch({ type: 'SWITCH_SHUFFLE' })}><ShuffleOutlinedIcon color={flashcard.shuffle ? 'primary' : 'secondary'} /></IconButton></Grid>
                     </Grid>
