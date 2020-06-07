@@ -101,7 +101,6 @@ const VoiceControl = (props) => {
 
 
     React.useEffect(() => {
-        console.log(props);
         if (!voice.active && listening)
             stopListening();
 

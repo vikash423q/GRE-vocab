@@ -1,19 +1,12 @@
 import React, { useEffect } from 'react';
-import Grid from '@material-ui/core/Grid';
-import AppBar from '@material-ui/core/AppBar';
 import makeStyles from '@material-ui/styles/makeStyles';
 import TopBar from './containers/TopBar';
 import { useSelector, useDispatch } from 'react-redux';
-import { loadWords } from './actions';
-import Question from './containers/Question';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import Grow from '@material-ui/core/Grow';
-import Typography from '@material-ui/core/Typography';
-import Paper from '@material-ui/core/Paper';
-import Button from '@material-ui/core/Button';
 import { fade } from '@material-ui/core/styles';
 import VoiceControl from './containers/VoiceControl';
 import CheatSheet from './containers/CheatSheet';
+import QuizApp from './containers/Quiz';
+import LearningApp from './containers/Learning';
 
 
 const redColor = '#ae0015';
@@ -75,57 +68,17 @@ function App() {
   const classes = useStyles();
   const dispatch = useDispatch();
 
+  const app = useSelector(state => state.app);
   const quiz = useSelector(state => state.quiz);
   const cheat = useSelector(state => state.cheat);
-
-  const loadQuiz = () => {
-    dispatch({ type: 'LOADING_QUIZ' });
-    dispatch({ type: 'LOAD_WORDS' });
-    dispatch({ type: 'PREPARE_QUIZ' });
-    dispatch({ type: 'LOADED_QUIZ' });
-  }
 
   return (
     <React.Fragment>
       {console.log('refreshing app..')}
       <TopBar />
-
-      <Grid container className={classes.container}>
-        {!quiz.started ? <Grow in={true}><Grid item>
-          <Paper className={classes.start}>
-            <Grid container direction="column" justify="center" align="center">
-              <Grid item>
-                <Button onClick={() => loadQuiz()} className="start-button" contained style={{ backgroundColor: '#ffa726' }}><Typography style={{ color: '#fff', fontWeight: 700 }}>Start Quiz</Typography></Button>
-              </Grid>
-            </Grid>
-          </Paper>
-        </Grid></Grow> : null}
-
-        {quiz.quiz.map((item, idx) => idx <= quiz.current ? <Question data={item} idx={idx} key={item.question} /> : null)}
-
-      </Grid>
-      <Grid container justify="center">
-        {quiz.loading ? <CircularProgress /> : null}
-      </Grid>
-      <Grid container className={classes.footer}>
-        <Grid item></Grid>
-        {quiz.showResult ? <Grow in={true}><Grid item>
-          <Paper className={classes.start}>
-            <Grid container direction="column" justify="center" align="center">
-              <Grid item>
-                <Typography variant="h5" className={classes.result_text}>Result: {quiz.quiz.filter(item => item.answerCorrect).length}/{quiz.num}</Typography>
-              </Grid>
-              <Grid item>
-                <Button onClick={() => loadQuiz()} className="restart-button" contained style={{ backgroundColor: '#ffa726' }}><Typography style={{ color: '#fff', fontWeight: 700 }}>Restart</Typography></Button>
-              </Grid>
-            </Grid>
-          </Paper>
-        </Grid></Grow> : null}
-        <Grid item></Grid>
-      </Grid>
+      {app.quizMode ? <QuizApp /> : <LearningApp />}
       <VoiceControl />
       <CheatSheet />
-      {/* {voice.active ? : null} */}
     </React.Fragment>
   );
 }

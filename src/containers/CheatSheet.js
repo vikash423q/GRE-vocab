@@ -59,7 +59,7 @@ const CheatSheet = (props) => {
     const dispatch = useDispatch();
     const cheat = useSelector(state => state.cheat);
     const data = cheat.data || {};
-    const results = data.results ? (data.results.length > 5 ? data.results.splice(0, 5) : data.results) : data.results || [];
+    const results = data.results ? (data.results.length > 5 ? data.results.slice(0, 5) : data.results) : data.results || [];
     // React.useEffect(() => {
     //     return () => { };
     // });

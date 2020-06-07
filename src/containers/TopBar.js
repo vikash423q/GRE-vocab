@@ -7,6 +7,8 @@ import Typography from '@material-ui/core/Typography';
 import Brightness4Icon from '@material-ui/icons/Brightness4';
 import Brightness7Icon from '@material-ui/icons/Brightness7';
 import MicIcon from '@material-ui/icons/Mic';
+import Book from '@material-ui/icons/ImportContactsOutlined';
+import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
 import Tooltip from '@material-ui/core/Tooltip';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -21,6 +23,9 @@ const useStyles = makeStyles(theme => ({
     },
     grow: {
         flexGrow: 1,
+    },
+    app: {
+        marginRight: theme.spacing(2),
     },
     microphone: {
         marginRight: theme.spacing(2),
@@ -43,6 +48,16 @@ const TopBar = (props) => {
                         VOCAB QUIZ
                     </Typography>
                     <div className={classes.grow}></div>
+                    <IconButton
+                        edge="start"
+                        className={classes.app}
+                        color="inherit"
+                        onClick={() => { dispatch({ type: 'TOGGLE_QUIZMODE' }) }}
+                    >
+                        <Tooltip title={state.quizMode ? "Switch to Learning App" : "Switch to Quiz App"}>
+                            {state.quizMode ? <Book /> : <QuestionAnswerIcon />}
+                        </Tooltip>
+                    </IconButton>
                     <IconButton
                         edge="start"
                         className={classes.microphone}
